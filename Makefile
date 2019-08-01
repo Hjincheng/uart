@@ -1,9 +1,4 @@
 
-main:main.c
-	gcc -o main main.c -lpthread -DDEBUG
-	sudo ./main /dev/ttysWK3 /dev/ttysWK2
-
-
 mainPc:mainPc.c
 	gcc -o mainPc mainPc.c -lpthread -DDEBUG
 	#sudo ./mainPc /dev/ttyUSB0 /dev/ttyUSB2
