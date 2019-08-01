@@ -1,0 +1,186 @@
+root@firefly:~/fierfly-uart# ./main /dev/ttysWK2 /dev/ttysWK1
+I am firely
+thread_get_zigbee_addr[292]: fd = 4
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+thread_get_zigbee_addr[292]: fd = 3
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+
+****/dev/ttysWK2***len = 20*****************
+2f 64 65 76 2f 74 74 79 55 53 00 00 00 00 00 00 
+00 00 00 00 
+
+hello hello
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK2***len = 20*****************
+42 32 0a 2f 64 65 76 2f 74 74 00 00 00 00 00 00 
+00 00 00 00 
+
+hello hello
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+hello hello
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK2***len = 20*****************
+79 55 53 42 32 0a 2f 64 65 76 00 00 00 00 00 00 
+00 00 00 00 
+
+hello hello
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+hello hello
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK2***len = 20*****************
+2f 74 74 79 55 53 42 32 0a 2f 00 00 00 00 00 00 
+00 00 00 00 
+
+^C
+root@firefly:~/fierfly-uart# ./main /dev/ttysWK2 /dev/ttysWK1
+I am firely
+thread_get_zigbee_addr[292]: fd = 3
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+thread_get_zigbee_addr[292]: fd = 4
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK2***len = 20*****************
+2f 64 65 76 2f 74 74 79 55 53 00 00 00 00 00 00 
+00 00 00 00 
+
+
+****/dev/ttysWK1***len = 20*****************
+2f 64 65 76 2f 74 74 79 55 53 00 00 00 00 00 00 
+00 00 00 00 
+
+hello hello
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+hello hello
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+
+****/dev/ttysWK2***len = 20*****************
+42 32 0a 2f 64 65 76 2f 74 74 00 00 00 00 00 00 
+00 00 00 00 
+
+
+****/dev/ttysWK1***len = 20*****************
+42 30 0a 2f 64 65 76 2f 74 74 00 00 00 00 00 00 
+00 00 00 00 
+
+^C
+root@firefly:~/fierfly-uart# ./main /dev/ttysWK2 /dev/ttysWK1
+I am firely
+thread_get_zigbee_addr[292]: fd = 3
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+thread_get_zigbee_addr[292]: fd = 4
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK1***len = 20*****************
+2f 64 65 76 2f 74 74 79 55 53 00 00 00 00 00 00 
+00 00 00 00 
+
+
+****/dev/ttysWK2***len = 20*****************
+2f 64 65 76 2f 74 74 79 55 53 00 00 00 00 00 00 
+00 00 00 00 
+
+hello hello
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+hello hello
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK1***len = 20*****************
+42 30 0a 2f 64 65 76 2f 74 74 00 00 00 00 00 00 
+00 00 00 00 
+
+
+****/dev/ttysWK2***len = 20*****************
+42 32 0a 2f 64 65 76 2f 74 74 00 00 00 00 00 00 
+00 00 00 00 
+
+hello hello
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+hello hello
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK1***len = 20*****************
+79 55 53 42 30 0a 2f 64 65 76 00 00 00 00 00 00 
+00 00 00 00 
+
+
+****/dev/ttysWK2***len = 20*****************
+79 55 53 42 32 0a 2f 64 65 76 00 00 00 00 00 00 
+00 00 00 00 
+
+^C
+root@firefly:~/fierfly-uart# ./main /dev/ttysWK2 /dev/ttysWK1
+I am firely
+thread_get_zigbee_addr[292]: fd = 3
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+thread_get_zigbee_addr[292]: fd = 4
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK1***len = 20*****************
+2f 64 65 76 2f 74 74 79 55 53 00 00 00 00 00 00 
+00 00 00 00 
+
+
+****/dev/ttysWK2***len = 20*****************
+2f 64 65 76 2f 74 74 79 55 53 00 00 00 00 00 00 
+00 00 00 00 
+
+hello hello
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+hello hello
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK1***len = 20*****************
+42 30 0a 2f 64 65 76 2f 74 74 00 00 00 00 00 00 
+00 00 00 00 
+
+
+****/dev/ttysWK2***len = 20*****************
+42 32 0a 2f 64 65 76 2f 74 74 00 00 00 00 00 00 
+00 00 00 00 
+
+hello hello
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+hello hello
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK1***len = 20*****************
+79 55 53 42 30 0a 2f 64 65 76 00 00 00 00 00 00 
+00 00 00 00 
+
+
+****/dev/ttysWK2***len = 20*****************
+79 55 53 42 32 0a 2f 64 65 76 00 00 00 00 00 00 
+00 00 00 00 
+
+^C
+root@firefly:~/fierfly-uart# ./main /dev/ttysWK2 /dev/ttysWK1
+I am firely
+thread_get_zigbee_addr[292]: fd = 4
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+thread_get_zigbee_addr[292]: fd = 3
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+
+****/dev/ttysWK2***len = 20*****************
+2f 64 65 76 2f 74 74 79 55 53 00 00 00 00 00 00 
+00 00 00 00 
+
+hello hello
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK2***len = 20*****************
+42 32 0a 2f 64 65 76 2f 74 74 00 00 00 00 00 00 
+00 00 00 00 
+
+hello hello
+thread_get_zigbee_addr[298]: fd = 3,ret=8
+hello hello
+thread_get_zigbee_addr[298]: fd = 4,ret=8
+
+****/dev/ttysWK2***len = 20*****************
+79 55 53 42 32 0a 2f 64 65 76 00 00 00 00 00 00 
+00 00 00 00 
+
+^C

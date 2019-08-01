@@ -1,0 +1,11 @@
+#1.如有需要修改Makefile，配置接受传串口
+#vim Makefile
+
+
+#2.在主机发送端发送数据
+#make mainPc
+
+
+#3.执行以下命令接受
+make main
+
