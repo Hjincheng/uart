@@ -264,75 +264,58 @@ int sys_uart_write(int uartid, unsigned char buf[], int len, int timeout_ms)
 }
 
 
-typedef struct s_uart{
-	int fd;
-	char *uart_name;
-}s_uart;
-
-
 /*************************************************
  * thread_rx_tx
  **************************************************/
-void* thread_rx_tx(void * arg)
+void* thread_rx_tx(void *arg)
 {
-	s_uart* uart = (s_uart *)arg;
-	int fd = uart->fd;
-	char *uart_name = uart->uart_name;
+	int fd = 0;
+	char *uart_name = (char *)arg;
+
 	char wbuff[64] = "abcdefg";//{"PC: this is PC message"}; //{0};
 
 	char rbuff[20] = {0};
 	char rbuff_wanted[] = {0xFE ,0x05 ,0x90 ,0x21 ,0x00 ,0x00,0x01,0xFF};
 	int ret = 0;
 
+    fd = open(uart_name, O_RDWR|O_NOCTTY);
+    if(fd < 0)
+    {
+        fprintf(stderr,"uart_open %s error\n", uart_name);
+        perror("open:");
+        return (void *)-3;
+    }
+
+    if(uart_set(fd, 115200, 8, 0, 1) < 0)
+    {
+        fprintf(stderr,"uart set failed!\n");
+        return (void *)-4;
+    }
 
 
-	printf("%s[%d]: fd = %d\n", __func__, __LINE__, fd);
-	//DEBUG_PRINT("%s[%d]: fd = %d\n", __func__, __LINE__, fd);
-	while (1) {
-        	ret = sys_uart_read(fd, rbuff, sizeof(rbuff_wanted), 100);
+    //sprintf(wbuff, "%s", (char*)arg);
+    //wbuff[strlen(arg)] = '\0';
 
-		printf("%s:read end ret:%d\n", uart_name, ret);
-		if(ret > 0){
-			//DEBUG_PRINT("recive data\n");
-			//DEBUG_PRINT_BUF(uart_name, rbuff, sizeof(rbuff));
-			rbuff[ret] = '\0';
-			printf("%s:receive data:%s\n", uart_name, rbuff);
-			printf("%ld\n", strlen(wbuff));
-			ret = sys_uart_write(fd, wbuff, strlen(wbuff), 10000);
-		}
-		else
-		{
-			ret = sys_uart_write(fd, wbuff, strlen(wbuff), 10000);
-			printf("%s:write end ret: %d!\n", uart_name, ret);
-		}
+ //   DEBUG_PRINT("%s[%d]: fd = %d\n", __func__, __LINE__, fd);
+
+    while (1) {
+        ret = sys_uart_read(fd, rbuff, sizeof(rbuff_wanted), 10);
+        if(ret > 0){
+      	//DEBUG_PRINT("recive data\n");
+            //DEBUG_PRINT_BUF(uart_name, rbuff, sizeof(rbuff));
+	    rbuff[ret] = '\0';
+	    printf("%s:receive data:%s\n", uart_name, rbuff);
+            	printf("%ld\n", strlen(wbuff));
+		ret = sys_uart_write(fd, wbuff, strlen(wbuff), 10000);
+        }
+	else
+		ret = sys_uart_write(fd, wbuff, strlen(wbuff), 10000);
 	//else
 	//	printf("%s:not receive\n", uart_name);
-	}
+    }
 }
 
 
-int init_uart(void *arg)
-{
-	char * uart_name = (char *)arg;
-	int fd;
-	fd = open(uart_name, O_RDWR|O_NOCTTY);
-	if(fd < 0)
-	{
-		printf("%s:open error!\n", uart_name);
-		fprintf(stderr,"uart_open %s error\n", uart_name);
-		perror("open:");
-		return -3;
-	}
-
-	if(uart_set(fd, 115200, 8, 0, 1) < 0)
-	{
-		printf("%s:set error", uart_name);
-		fprintf(stderr,"uart set failed!\n");
-		return -3;
-	}
-	
-	return fd;
-}
 
 
 /*************************************************
@@ -340,41 +323,35 @@ int init_uart(void *arg)
  **************************************************/
 int main(int argc, const char *argv[])
 {
-	int ret = 0;
-	pthread_t tid1, tid2;
-	int speed = 0;
-	int check = 0;
-	int var = -1;
-	s_uart uart[2];
+    int ret = 0;
+    pthread_t tid1, tid2;
+    int speed = 0;
+    int check = 0;
+    int var = -1;
 
-	if(argc != 3){
-		printf("Usage: %s /dev/ttyUSB0 /dev/ttyUSB1\n", argv[0]);
-		return -1;
-	}
+    if(argc != 3){
+        printf("Usage: %s /dev/ttyUSB0 /dev/ttyUSB1\n", argv[0]);
+        return -1;
+    }
     
-	printf("I am pc\n");
+    printf("I am pc\n");
 
+    if(pthread_create(&tid1, NULL, thread_rx_tx, (void *)argv[1])){
+        printf("thread1 create err\n");
+        return -1;
+    }
+	
+    usleep(50*1000);
+    if(pthread_create(&tid2,NULL,thread_rx_tx, (void *)argv[2])){
+        printf("thread2 create err\n");
+        return -1;
+    }
 
-	uart[0].fd = init_uart((void *)argv[1]);
-	uart[0].uart_name = argv[1];
+    while(1){
+        sleep(1);
+    }
 
-	uart[1].fd = init_uart((void *)argv[2]);
-	uart[1].uart_name = argv[2];
-
-	if(pthread_create(&tid1, NULL, thread_rx_tx, &uart[0])){
-		printf("thread1 create err\n");
-		return -1;
-	}
-	if(pthread_create(&tid2,NULL,thread_rx_tx, &uart[1])){
-		printf("thread2 create err\n");
-		return -1;
-	}
-
-	while(1){
-		sleep(1);
-	}
-
-	return 0;
+    return 0;
 }
 
 
